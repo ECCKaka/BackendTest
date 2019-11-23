@@ -46,7 +46,7 @@ class SessionSerializer(ModelSerializer):
 
     class Meta:
         model = Session
-        fields = "__all__"
+        fields = ['sessionId']
 
 class UserSerializer(ModelSerializer):
     actions = ActionsSerializer(many=True, required=False)
@@ -74,6 +74,9 @@ class UserSerializer(ModelSerializer):
             actions = validated_data.pop('actions', [])
             sessions = validated_data.pop('session',[])
             userId = validated_data.pop('id', None)
+            user = User.objects.filter(id = userId)
+            if len(user)==0:
+                return 'there is no such user'
             user = User.objects.get(id = userId)
             for session in sessions:
 
