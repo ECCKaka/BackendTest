@@ -25,7 +25,7 @@ from rest_framework import routers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    
     url(r'^api/', include(("backendTest.api.urls", "backendTest"), namespace='backendTest')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

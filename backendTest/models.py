@@ -4,23 +4,6 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 # Create your models here.
-class Profile(models.Model):
-    profileId = models.AutoField(primary_key=True)
-    user = models.OneToOneField(User, related_name = 'user', on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = "Profile"
-        db_table = "Profile"
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
-
 class Actions(models.Model):
     actionId = models.AutoField(primary_key=True)
     time = models.DateTimeField(auto_now_add = False, null=True)
