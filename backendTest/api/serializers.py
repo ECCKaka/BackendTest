@@ -49,6 +49,8 @@ class SessionSerializer(ModelSerializer):
         fields = ['sessionId']
 
 class UserSerializer(ModelSerializer):
+
+    # one to many relationship.
     actions = ActionsSerializer(many=True, required=False)
     session = SessionSerializer(many=True, required=False)
     class Meta:
@@ -69,22 +71,29 @@ class UserSerializer(ModelSerializer):
                 "required": False,
             },
         }
+
+    # sepecify the create function.
     def create(self, validated_data):
+        # abort if part of the data is giving error.
         with transaction.atomic():
             actions = validated_data.pop('actions', [])
             sessions = validated_data.pop('session',[])
             userId = validated_data.pop('id', None)
             user = User.objects.filter(id = userId)
+
+            # if there is no such user, raise error
             if len(user)==0:
-                return 'there is no such user'
+                raise {'code':406, 'status': 'there is no such user'}
             user = User.objects.get(id = userId)
+
+            # create sessions one by one.
             for session in sessions:
 
                 sessionId = Session.objects.filter(userId = user, sessionId = session['sessionId'])
 
                 if len(sessionId) == 0:
                     Session.objects.create(userId = user, sessionId = session['sessionId'])
-
+            # create actions one by one.
             for action in actions:
                 actionId = Actions.objects.create(
                         time = action['time'],
