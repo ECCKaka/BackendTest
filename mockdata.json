@@ -1,0 +1,43 @@
+{
+  "id": 3,
+  "session": [
+                {
+                    "sessionId": "XYZ456ABC"
+                }
+            ],
+  "actions": [
+    {
+      "time": "2018-10-18T21:37:28-06:00",
+      "type": "CLICK",
+      "properties": {
+        "locationX": 52,
+        "locationY": 11,
+        "pageFrom": null,
+        "pageTo": null,
+        "viewedId": null
+      }
+    },
+    {
+      "time": "2018-10-18T21:37:30-06:00",
+      "type": "VIEW",
+      "properties": {
+        "viewedId": "FDJKLHSLD",
+	      "locationX": null,
+        "locationY": null,
+        "pageFrom": null,
+        "pageTo": null
+        }
+    },
+    {
+      "time": "2018-10-18T21:37:30-06:00",
+      "type": "NAVIGATE",
+      "properties": {
+        "pageFrom": "communities",
+        "pageTo": "inventory",
+    	  "viewedId": null,
+        "locationX": null,
+        "locationY": null
+      }
+    }
+  ]
+}
