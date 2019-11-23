@@ -28,7 +28,7 @@ class Properties(models.Model):
         db_table = "Properties"
 
 class Session(models.Model):
-
+    id = models.AutoField(primary_key=True)
     sessionId = models.TextField(null=True)
     userId = models.ForeignKey(User, related_name = 'session', on_delete=models.CASCADE, db_column = "userId")
 
