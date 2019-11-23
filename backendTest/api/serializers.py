@@ -46,7 +46,7 @@ class SessionSerializer(ModelSerializer):
 
     class Meta:
         model = Session
-        fields = ['sessionId']
+        fields = "__all__"
 
 class UserSerializer(ModelSerializer):
     actions = ActionsSerializer(many=True, required=False)
